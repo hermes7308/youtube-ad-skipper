@@ -7,7 +7,13 @@ function Skip() {
 
     // Skip Ad video, ytp-progress-bar-padding
     if (document.getElementsByClassName("ad-interrupting").length > 0) {
-        document.getElementsByTagName("video")[0].currentTime = Number.MAX_SAFE_INTEGER;
+        let numOfVideos = document.getElementsByTagName("video").length;
+        if (numOfVideos == 0) {
+            return;
+        }
+
+        const lastVideoIndex = numOfVideos - 1
+        document.getElementsByTagName("video")[lastVideoIndex].currentTime = Number.MAX_SAFE_INTEGER;
         if (document.getElementsByClassName("ytp-ad-skip-button").length > 0) {
             document.getElementsByClassName("ytp-ad-skip-button")[0].click();
         }
