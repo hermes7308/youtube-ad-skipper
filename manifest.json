@@ -1,28 +1,37 @@
 {
-    "name": "Youtube AD Skipper",
-    "version": "1.0",
-    "description": "Youtube AD Skipper",
-    "manifest_version": 2,
-    "background": {
-      "scripts": [
-        "background.js"
+  "name": "Youtube AD Skipper",
+  "description": "Youtube AD Skipper",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.youtube.com/*"
+      ],
+      "js": [
+        "content.js"
       ]
-    },
-    "content_scripts": [
-      {
-        "matches": [
-          "https://www.youtube.com/*"
-        ],
-        "js": [
-          "content.js"
-        ]
-      }
-    ],
-    "web_accessible_resources": [
-      "style.css"
-    ],
-    "browser_action": {
-      "default_popup": "popup.html",
-      "default_title": "Youtube AD Skipper"
     }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "style.css"
+      ],
+      "matches": [
+        "https://*.youtube.com/*"
+      ]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Youtube AD Skipper"
   }
+}

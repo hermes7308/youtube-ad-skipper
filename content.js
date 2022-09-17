@@ -1,10 +1,8 @@
 console.log("Youtube AD Skipper is initialized.");
 
 setInterval(() => {
-    chrome.runtime.sendMessage({
-        name: "getStatus"
-    }, ({ status: status }) => {
-        if (status) {
+    chrome.runtime.sendMessage("getStatus", (response) => {
+        if (response.status) {
             Skip();
         }
     });
