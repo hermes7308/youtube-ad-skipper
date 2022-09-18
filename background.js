@@ -2,9 +2,14 @@ var state = {
     status: true
 };
 
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    if (message === "setStatus") {
-        state.status = request.status;
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    const {
+        message,
+        data
+    } = request;
+
+    if (message == "setStatus") {
+        state.status = data.status;
         return;
     }
 

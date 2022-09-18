@@ -9,13 +9,14 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector("input").addEventListener("change", onChange, false);
     function onChange() {
         let checked = document.querySelector("input").checked;
-        chrome.tabs.query({ currentWindow: true, active: true },
-            function (tabs) {
-                chrome.runtime.sendMessage({
-                    "name": "setStatus",
+        chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
+            chrome.runtime.sendMessage({
+                "message": "setStatus",
+                "data": {
                     "status": checked
-                })
+                }
             });
+        });
     }
 
     // current active status
