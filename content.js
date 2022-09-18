@@ -13,6 +13,10 @@ function Skip() {
     if (document.documentElement.getElementsByClassName("ad-interrupting").length > 0
         || document.documentElement.getElementsByClassName("ytp-ad-preview-text").length > 0) {
         const primary = document.getElementById("primary");
+        const videos = primary.getElementsByTagName("video");
+        if (videos.length == 0) {
+            return;
+        }
         const video = primary.getElementsByTagName("video")[0];
         video.currentTime = Number.MAX_SAFE_INTEGER;
 
@@ -20,7 +24,8 @@ function Skip() {
             document.documentElement.getElementsByClassName("ytp-ad-skip-button")[0].click();
         }
         console.log("Ad video is skipped.")
-    }// ytp-ad-text ytp-ad-preview-text
+    }
+
     // Skip Ad banner
     if (document.documentElement.getElementsByClassName("ytp-ad-image-overlay").length > 0) {
         if (document.documentElement.getElementsByClassName("ytp-ad-overlay-close-button").length > 0) {
