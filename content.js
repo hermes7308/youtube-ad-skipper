@@ -12,7 +12,10 @@ function Skip() {
     // Skip Ad video, ytp-progress-bar-padding
     if (document.documentElement.getElementsByClassName("ad-interrupting").length > 0
         || document.documentElement.getElementsByClassName("ytp-ad-preview-text").length > 0) {
-        document.documentElement.getElementsByTagName("video")[0].currentTime = Number.MAX_SAFE_INTEGER;
+        const primary = document.getElementById("primary");
+        const video = primary.getElementsByTagName("video")[0];
+        video.currentTime = Number.MAX_SAFE_INTEGER;
+
         if (document.documentElement.getElementsByClassName("ytp-ad-skip-button").length > 0) {
             document.documentElement.getElementsByClassName("ytp-ad-skip-button")[0].click();
         }
