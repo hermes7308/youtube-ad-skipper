@@ -1,13 +1,21 @@
-console.log("Youtube AD Skipper is initialized.");
+var pid = null;
+window.addEventListener("load", (event) => {
+    console.log("Youtube AD Skipper is initialized.");
+    pid = setInterval(() => {
+        chrome.runtime.sendMessage({ message: "getStatus" }, (response) => {
+            if (response.status) {
+                Skip();
+            }
+        });
+    }, 10);
+})
 
-setInterval(() => {
-    chrome.runtime.sendMessage({ message: "getStatus" }, (response) => {
-        const { status } = response
-        if (status) {
-            Skip();
-        }
-    });
-}, 10);
+window.addEventListener("beforeunload", (event) => {
+    console.log("Close youtube ad skiper: " + pid);
+    if (pid != null) {
+        clearInterval(pid);
+    }
+});
 
 function Skip() {
     // Skip Ad video, ytp-progress-bar-padding
@@ -21,7 +29,7 @@ function Skip() {
         if (document.documentElement.getElementsByClassName("ytp-ad-skip-button").length > 0) {
             document.documentElement.getElementsByClassName("ytp-ad-skip-button")[0].click();
         }
-        console.log("Ad video is skipped.")
+        console.log("Ad video is skipped.");
     }
 
     // Skip Ad banner
