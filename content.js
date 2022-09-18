@@ -6,7 +6,7 @@ setInterval(() => {
             Skip();
         }
     });
-}, 1);
+}, 10);
 
 function Skip() {
     // Skip Ad video, ytp-progress-bar-padding
