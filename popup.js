@@ -19,7 +19,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // current active status
-    const bg = chrome.extension.getBackgroundPage();
-    document.querySelector("input").checked = bg.state.status;
+    chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
+        chrome.runtime.sendMessage({
+            "message": "getStatus"
+        }, (response) => {
+            document.querySelector("input").checked = response.status ? true : false;
+        })
+    });
 }, false);
